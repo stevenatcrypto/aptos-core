@@ -31,6 +31,7 @@ pub mod move_types {
     pub use move_deps::move_core_types::*;
 }
 
+#[cfg(feature = "network")]
 pub mod rest_client {
     pub use aptos_rest_client::*;
 }

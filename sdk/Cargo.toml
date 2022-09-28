@@ -9,11 +9,15 @@ license = "Apache-2.0"
 publish = false
 edition = "2021"
 
+[features]
+default = []
+network = ["aptos-rest-client"]
+
 [dependencies]
 anyhow = "1.0.57"
 aptos-crypto = { path = "../crates/aptos-crypto" }
 aptos-global-constants = { path = "../config/global-constants" }
-aptos-rest-client = { path = "../crates/aptos-rest-client" }
+aptos-rest-client = { path = "../crates/aptos-rest-client", optional = true }
 aptos-types = { path = "../types" }
 bcs = "0.1.3"
 cached-packages = { path = "../aptos-move/framework/cached-packages" }
