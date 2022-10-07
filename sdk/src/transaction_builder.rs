@@ -5,14 +5,19 @@ use crate::{
     move_types::account_address::AccountAddress,
     types::{
         chain_id::ChainId,
-        transaction::{authenticator::AuthenticationKey, RawTransaction, TransactionPayload},
+        transaction::{RawTransaction, TransactionPayload},
     },
 };
-use aptos_crypto::ed25519::Ed25519PublicKey;
 use aptos_global_constants::{GAS_UNIT_PRICE, MAX_GAS_AMOUNT};
-use aptos_types::transaction::{
-    authenticator::AuthenticationKeyPreimage, EntryFunction, ModuleBundle, Script,
-};
+use aptos_types::transaction::{EntryFunction, ModuleBundle, Script};
+
+#[cfg(feature = "network")]
+use crate::types::transaction::authenticator::AuthenticationKey;
+#[cfg(feature = "network")]
+use aptos_crypto::ed25519::Ed25519PublicKey;
+#[cfg(feature = "network")]
+use aptos_types::transaction::authenticator::AuthenticationKeyPreimage;
+#[cfg(feature = "network")]
 pub use cached_packages::aptos_stdlib;
 
 pub struct TransactionBuilder {
@@ -140,6 +145,7 @@ impl TransactionFactory {
         self.payload(TransactionPayload::EntryFunction(func))
     }
 
+    #[cfg(feature = "network")]
     pub fn create_user_account(&self, public_key: &Ed25519PublicKey) -> TransactionBuilder {
         let preimage = AuthenticationKeyPreimage::ed25519(public_key);
         self.payload(aptos_stdlib::aptos_account_create_account(
@@ -147,6 +153,7 @@ impl TransactionFactory {
         ))
     }
 
+    #[cfg(feature = "network")]
     pub fn implicitly_create_user_account_and_transfer(
         &self,
         public_key: &Ed25519PublicKey,
@@ -159,10 +166,12 @@ impl TransactionFactory {
         ))
     }
 
+    #[cfg(feature = "network")]
     pub fn transfer(&self, to: AccountAddress, amount: u64) -> TransactionBuilder {
         self.payload(aptos_stdlib::aptos_coin_transfer(to, amount))
     }
 
+    #[cfg(feature = "network")]
     pub fn mint(&self, to: AccountAddress, amount: u64) -> TransactionBuilder {
         self.payload(aptos_stdlib::aptos_coin_mint(to, amount))
     }
