@@ -30,7 +30,7 @@ aptos-global-constants = { path = "../../config/global-constants" }
 aptos-keygen = { path = "../aptos-keygen" }
 aptos-logger = { path = "../aptos-logger" }
 aptos-rest-client = { path = "../../crates/aptos-rest-client" }
-aptos-sdk = { path = "../../sdk" }
+aptos-sdk = { path = "../../sdk", features = ["network"] }
 aptos-warp-webserver = { path = "../aptos-warp-webserver" }
 
 [dev-dependencies]

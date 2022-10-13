@@ -172,6 +172,11 @@ impl TransactionFactory {
     }
 
     #[cfg(feature = "network")]
+    pub fn account_transfer(&self, to: AccountAddress, amount: u64) -> TransactionBuilder {
+        self.payload(aptos_stdlib::aptos_account_transfer(to, amount))
+    }
+
+    #[cfg(feature = "network")]
     pub fn mint(&self, to: AccountAddress, amount: u64) -> TransactionBuilder {
         self.payload(aptos_stdlib::aptos_coin_mint(to, amount))
     }

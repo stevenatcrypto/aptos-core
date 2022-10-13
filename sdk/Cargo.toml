@@ -21,7 +21,7 @@ aptos-rest-client = { path = "../crates/aptos-rest-client", optional = true }
 aptos-types = { path = "../types" }
 bcs = { git = "https://github.com/aptos-labs/bcs", rev = "2cde3e8446c460cb17b0c1d6bac7e27e964ac169" }
 cached-packages = { path = "../aptos-move/framework/cached-packages", optional = true }
-move-core-types = { git = "https://github.com/move-language/move", features = ["address32"], rev = "e61c8d7c5e9c8085ce2602ef9a5ae9b2500dbfa4" }
+move-core-types = { git = "https://github.com/move-language/move", features = ["address32"], rev = "c49400cff7851bf126de8105d0ea645d6b1cead2" }
 rand_core = "0.5.1"
 serde = { version = "1.0.137", features = ["derive"] }
 
